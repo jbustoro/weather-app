@@ -49,7 +49,7 @@ export class Weather extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { changedTo } = treeChanges(this.props, nextProps);
 
-    // TODO Set 404 page when the status changes to error
+    // TODO Set 404 page when the status changes to error (added provisional on render, checking STATUS.ERROR)
     if (changedTo("weather.status", STATUS.ERROR)) {
       console.log(nextProps.weather.message);
     }
@@ -295,6 +295,14 @@ export class Weather extends React.Component {
       } else {
         output = <h3>Nothing found</h3>;
       }
+    } else if (weather.status === STATUS.ERROR) {
+      output = (
+        <Container className="error-container">
+          <div className="error" title="404">
+            404
+          </div>
+        </Container>
+      );
     }
 
     return (

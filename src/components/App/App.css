@@ -1,0 +1,14 @@
+.bg {
+  background: url("../../assets/capitals/capital.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(5px);
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  /* Needed to remove margin from blur effect */
+  transform: scale(1.1);
+}

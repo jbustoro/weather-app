@@ -51,7 +51,7 @@ export class Weather extends React.Component {
 
     // TODO Set 404 page when the status changes to error (added provisional on render, checking STATUS.ERROR)
     if (changedTo("weather.status", STATUS.ERROR)) {
-      console.log(nextProps.weather.message);
+      // console.log(nextProps.weather.message);
     }
   }
 

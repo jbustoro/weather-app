@@ -105,7 +105,7 @@ export class Weather extends React.Component {
    *
    * @param {*} list (Weather 5 day / 3 hour forecast)
    */
-  getWeakWeather(list) {
+  getweekWeather(list) {
     // TODO Fix Each child in a list should have a unique "key" prop.
     // Divide weather list (3 hour forecast) in days weather list
     let dayAux = -1;
@@ -189,7 +189,7 @@ export class Weather extends React.Component {
     let output;
 
     if (weather.status === STATUS.READY) {
-      // If we received weather data from the api, create current weather and weak weather
+      // If we received weather data from the api, create current weather and week weather
       if (data) {
         const {
           city: { name, timezone },
@@ -258,10 +258,10 @@ export class Weather extends React.Component {
           </Container>
         );
 
-        const weakWeather = (
-          <Container className="weakWeather">
+        const weekWeather = (
+          <Container className="weekWeather">
             <Flex>
-              {this.getWeakWeather(list).map(weather => {
+              {this.getweekWeather(list).map(weather => {
                 const { day, tempMax, tempMin, icon } = weather;
 
                 return (
@@ -289,7 +289,7 @@ export class Weather extends React.Component {
         output = (
           <Container>
             {currentWeather}
-            {weakWeather}
+            {weekWeather}
           </Container>
         );
       } else {

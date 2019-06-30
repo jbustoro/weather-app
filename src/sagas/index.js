@@ -11,13 +11,17 @@ import { request } from "../modules/client";
 
 const API_KEY = "YOUR_API_KEY";
 
+/**
+ *
+ * @param {*} {query}
+ */
 export function* getWeather({ payload }) {
   try {
     const response = yield call(
       request,
       `http://api.openweathermap.org/data/2.5/forecast?q=${
         payload.query
-      }&appid=${API_KEY}`
+      }&units=metric&appid=${API_KEY}`
     );
     yield put({
       type: ActionTypes.GET_WEATHER_SUCCESS,

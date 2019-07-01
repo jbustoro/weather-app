@@ -131,8 +131,8 @@ export class Weather extends React.Component {
       const [{ dt_txt }] = dayWeatherList;
       const day = moment(dt_txt).format("dddd");
       // Initialize temperatures and icons array
-      const tempMaxArray = [];
-      const tempMinArray = [];
+      let tempMax = -666;
+      let tempMin = 666;
       const icons = [];
 
       // Fill temperatures and icons array with the current day values
@@ -142,18 +142,16 @@ export class Weather extends React.Component {
           weather: [{ icon }]
         } = element;
 
-        tempMaxArray.push(temp_max);
-        tempMinArray.push(temp_min);
+        if (temp_max > tempMax) {
+          tempMax = temp_max;
+        }
+
+        if (temp_min < tempMin) {
+          tempMin = temp_min;
+        }
+
         icons.push(icon);
       });
-
-      // Get temperature min/max averages for the day
-      const averageTempMax =
-        tempMaxArray.reduce((total, tempMax) => total + tempMax) /
-        tempMaxArray.length;
-      const averageTempMin =
-        tempMinArray.reduce((total, tempMin) => total + tempMin) /
-        tempMinArray.length;
 
       // Count how many times the icon appears in icons array
       const iconCounts = icons.reduce((counts, element) => {
@@ -170,9 +168,9 @@ export class Weather extends React.Component {
 
       // Form Object with the average weather values for the current day
       const dayWeatherAverage = {
-        day: day,
-        tempMax: averageTempMax,
-        tempMin: averageTempMin,
+        day,
+        tempMax,
+        tempMin,
         icon: mostRepeatedIcon
       };
 
@@ -275,8 +273,10 @@ export class Weather extends React.Component {
                         src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
                       />
                       <Legend color="white">
-                        <span>{`${temp > 0 ? "+" : "-"}`}</span>
-                        {`${tempMax.toFixed()}°/${tempMin.toFixed()}°`}
+                        <span>{`${tempMax > 0 ? "+" : "-"}`}</span>
+                        {`${tempMax.toFixed()}°/`}
+                        <span>{`${tempMin > 0 ? "+" : "-"}`}</span>
+                        {`${tempMin.toFixed()}°`}
                       </Legend>
                     </Flex>
                   </Box>

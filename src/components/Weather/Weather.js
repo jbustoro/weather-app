@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import PropTypes from "prop-types";
 import React from "react";
+import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
 import {
   Badge,
@@ -186,7 +187,13 @@ export class Weather extends React.Component {
 
     let output;
 
-    if (weather.status === STATUS.READY) {
+    if (weather.status === STATUS.RUNNING) {
+      output = (
+        <Container className="spinner-container">
+          <Loader type="Circles" color="white" height="100" width="100" />
+        </Container>
+      );
+    } else if (weather.status === STATUS.READY) {
       // If we received weather data from the api, create current weather and week weather
       if (data) {
         const {
